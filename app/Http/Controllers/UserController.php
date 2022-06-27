@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -13,9 +16,25 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return "sir";
+        // $users = [];
+
+        // $active = $request->input('active');
+
+        // if ($active) {
+        //     $users = User::where('active', $active)->get();
+        // } else {
+        //     $users = User::all();
+        // }
+        // $users = User::all();
+        // return $age;
+
+        // $users = User::where('active', 1)->get();
+        
+        $users = User::all();
+        //return $users->load('posts');
+         return new UserCollection($users);
     }
 
     /**
@@ -24,16 +43,17 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        return "madam";
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
+        $user->age = $request->input('age');
+        $user->active = $request->input('active');
         $user->save();
 
-        return $user;
+        return new UserResource($user);
     }
 
     /**
@@ -42,9 +62,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        return "Yaqoub";
+        return new UserResource($user);
     }
 
     /**
