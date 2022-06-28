@@ -17,6 +17,9 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            // instead of loading the whole relationship, just load the key inside the relationship
+            // without the  ?? '' it will give an error because most of the records do not have data
+            'role' => $this->role->role ?? '',
             // 'age' => $this->age,
             // 'active' => $this->active,
              'posts' => $this->posts

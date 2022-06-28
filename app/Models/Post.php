@@ -14,6 +14,15 @@ class Post extends Model
 
     public function user()
     {
+
+        //relationships 
         return $this->belongsTo(User::class);
+        
+        
+    }
+
+    //website relation
+    public function website(){
+        return $this->belongsTo(Website::class);
     }
 }

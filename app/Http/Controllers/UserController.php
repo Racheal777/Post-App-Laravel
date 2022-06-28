@@ -51,6 +51,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->age = $request->input('age');
         $user->active = $request->input('active');
+        $user->role_id = $request->input('role_id');
         $user->save();
 
         return new UserResource($user);

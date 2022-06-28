@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Post;
+use App\Models\Role;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -49,4 +50,10 @@ class User extends Authenticatable
     { 
         return $this->hasMany(Post::class);
     }
+
+    public function role(){
+        // table, foreign_key, local_table_ket
+        return $this->hasOne(Role::class, 'id', 'role_id');
+    }
+
 }

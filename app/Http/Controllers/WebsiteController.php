@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Website;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\PostCollection;
-use App\Http\Resources\PostResource;
-use App\Models\User;
 
-class PostController extends Controller
+class WebsiteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,15 +14,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //return the user with this id
-        $posts = Post::all();
-        // return $user;
+        //
+        $website=Website::all();
 
-        //return the post of this user
-        //$posts = $user->posts;
-        // $posts = Post::where('user_id', $user->id)->get();
-        return new PostCollection($posts);
-
+       // return "im working";
+         return $website;
     }
 
     /**
@@ -37,14 +29,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post();
-        $post->title = $request->input('title');
-        $post->content = $request->input('content');
-        $post->user_id = $request->input('user_id');
-        $post->website_id = $request->input('website_id');
-        $post->save();
+        //
+        // return "hello";
+        $website = new Website();
+        $website->name = $request->input('name');
+        $website->url = $request->input('url');
+        $website->save();
 
-        return $post;
+        return $website;
+
+
     }
 
     /**
@@ -53,13 +47,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        // $post = Post::find($id);
-
-        return new PostResource($post);
-
-        
+        //
     }
 
     /**
