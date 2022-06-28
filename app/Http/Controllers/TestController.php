@@ -23,7 +23,11 @@ class TestController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         return view('userForm');
+=======
+        //
+>>>>>>> 3fb4bc161cfcdb7d31308c20737512e2fb5ad903
     }
 
     /**
